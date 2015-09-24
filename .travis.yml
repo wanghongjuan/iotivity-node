@@ -1,5 +1,3 @@
-sudo: false
-
 language: cpp
 
 env:
@@ -22,6 +20,7 @@ install:
 - nvm install "${NODE_VERSION}"
 - npm install -g npm@^2.14.2
 - test "x${TRAVIS_OS_NAME}x" = "xosxx" && brew install scons || true
+- test "x${TRAVIS_OS_NAME}x" = "xosxx" && sudo route add -net 224.0.0.0/5 127.0.0.1 || true
 - npm install -g grunt-cli
 
 addons:
