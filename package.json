@@ -1,6 +1,6 @@
 {
   "name": "iotivity-node",
-  "version": "1.0.0-0",
+  "version": "1.0.1-pre-f38e29e23796cf62361fe6663d9648ef80723c64-0",
   "description": "IoTivity bindings",
   "repository": "https://github.com/otcshare/iotivity-node/",
   "license": "MIT",

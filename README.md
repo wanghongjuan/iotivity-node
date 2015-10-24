@@ -21,7 +21,7 @@ This project provides [iotivity][] node.js bindings.
 0. Run ```npm install```
 
 ### In more detail:
-iotivity-node depends on [iotivity][] proper. It has been tested against [1.0.0][] on Linux. iotivity depends on development headers for libuuid and boost.
+iotivity-node depends on [iotivity][] proper. It has been tested against [f38e29e][] on Linux. iotivity depends on development headers for libuuid and boost.
 
 iotivity-node requires a compiler that implements the C++11 standard.
 
@@ -76,8 +76,8 @@ Make sure no firewall is running (or one is properly configured to allow iotivit
 
 [iotivity]: http://iotivity.org/
 [node]: https://nodejs.org/
-[1.0.0]: https://gerrit.iotivity.org/gerrit/gitweb?p=iotivity.git;a=tree;hb=1.0.0
-[snapshot]: https://gerrit.iotivity.org/gerrit/gitweb?p=iotivity.git;a=snapshot;h=1.0.0;sf=tgz
+[f38e29e]: https://gerrit.iotivity.org/gerrit/gitweb?p=iotivity.git;a=tree;hb=f38e29e23796cf62361fe6663d9648ef80723c64
+[snapshot]: https://gerrit.iotivity.org/gerrit/gitweb?p=iotivity.git;a=snapshot;h=f38e29e23796cf62361fe6663d9648ef80723c64;sf=tgz
 [scons]: http://www.scons.org/
-[install.sh]: https://raw.githubusercontent.com/otcshare/iotivity-node/1.0.0-0/install.sh
-[octbstack.pc.in]: https://raw.githubusercontent.com/otcshare/iotivity-node/1.0.0-0/octbstack.pc.in
+[install.sh]: https://raw.githubusercontent.com/otcshare/iotivity-node/dev/install.sh
+[octbstack.pc.in]: https://raw.githubusercontent.com/otcshare/iotivity-node/dev/octbstack.pc.in
