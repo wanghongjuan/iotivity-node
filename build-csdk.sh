@@ -54,9 +54,10 @@ while test $# -gt 0; do
 	shift
 done
 
+SCONS_FLAGS="SECURED=1"
 
 if test "x${DO_DEBUG}x" = "xtruex"; then
-	SCONS_FLAGS="RELEASE=False"
+	SCONS_FLAGS=" RELEASE=False"
 fi
 
 set -x

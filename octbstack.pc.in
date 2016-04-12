@@ -6,4 +6,4 @@ Name: liboctbstack
 Description: iotivity CSDK
 Version: 1.0.1
 Libs: -L${libdir} -Wl,-rpath ${libdir} -loctbstack @PLATFORM_LIBS@
-Cflags: -I${includedir}/@OCTB_STACK_INCLUDEDIR@ -I${includedir}/@OCTB_RANDOM_INCLUDEDIR@ -I${includedir}/@OCTB_CCOMMON_INCLUDEDIR@ -DTCP_ADAPTER -DROUTING_EP
+Cflags: -I${includedir}/@OCTB_STACK_INCLUDEDIR@ -I${includedir}/@OCTB_RANDOM_INCLUDEDIR@ -I${includedir}/@OCTB_CCOMMON_INCLUDEDIR@ -DTCP_ADAPTER -DROUTING_EP -DDTLSV12 -DWITH_SHA256 -DDTLS_CHECK_CONTENTTYPE -DSHA2_USE_INTTYPES_H -DWITH_BWT -D__WITH_DTLS__ -DEASY_SETUP_CA_INIT
