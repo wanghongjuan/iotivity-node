@@ -91,6 +91,9 @@ function spawnOne( assert, options ) {
 			if ( jsonObject.assertionCount ) {
 				options.reportAssertions( jsonObject.assertionCount + 2 );
 
+			} else if ( jsonObject.info ) {
+				console.log( "\x1b[46;30mi\x1b[0m " + jsonObject.message );
+
 			// The child has requested a teardown.
 			} else if ( jsonObject.teardown ) {
 				options.teardown(
