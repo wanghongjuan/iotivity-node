@@ -231,9 +231,7 @@ function runTestSuites( files ) {
 								( clientPaths.length > 1 ? " " + ( ++clientIndex ) : "" ),
 						path: item } ) ) );
 
-						// Spawn clients at least two seconds apart to avoid message uniqueness
-						// issue in iotivity: https://jira.iotivity.org/browse/IOT-724
-						setTimeout( callback, 2000 );
+						setTimeout( callback, 0 );
 					} );
 				}
 			} ) ) );
