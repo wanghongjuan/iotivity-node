@@ -127,7 +127,7 @@ function runTestSuites( files ) {
 	_.each( files, function( item ) {
 		var clientPathIndex,
 			clientPaths = glob.sync( path.join( item, "client*.js" ) ),
-			serverPath = path.join( item, "server.js" );
+			serverPaths = glob.sync( path.join( item, "server*.js" ) );
 
 		if ( fs.lstatSync( item ).isFile() ) {
 			getQUnit().test( path.basename( item ).replace( /\.js$/, "" ), function( assert ) {
@@ -159,12 +159,14 @@ function runTestSuites( files ) {
 			}
 		}
 
-		if ( !( fs.lstatSync( serverPath ).isFile() ) ) {
-			throw new Error( "Cannot find server at " + serverPath );
-		}
+		serverPaths.forEach( function( serverPath ) {
+			if ( !( fs.lstatSync( serverPath ).isFile() ) ) {
+				throw new Error( "Cannot find server at " + serverPath );
+			}
+		} );
 
 		getQUnit().test( path.basename( item ), function( assert ) {
-			var totalChildren = clientPaths.length + 1,
+			var totalChildren = clientPaths.length + serverPaths.length,
 
 				// Track the child processes involved in this test in this array
 				children = [],
@@ -217,24 +219,27 @@ function runTestSuites( files ) {
 					}
 				};
 
-			// We run the server first, because the server has to be there before the clients
+			// We run the servers first, because the servers have to be there before the clients
 			// can run. OTOH, the clients may initiate the termination of the test via a non-error
 			// teardown request.
-			children.push( spawnOne( assert, _.extend( {}, spawnOptions, {
-				name: "Server",
-				path: serverPath,
-				onReady: function() {
-					var clientIndex = 0;
-					async.eachSeries( clientPaths, function startOneChild( item, callback ) {
-						children.push( spawnOne( assert, _.extend( {}, spawnOptions, {
-							name: "Client" +
-								( clientPaths.length > 1 ? " " + ( ++clientIndex ) : "" ),
-						path: item } ) ) );
+			async.each( serverPaths, function( serverPath, callback ) {
+				var serverIndex = 0;
+				children.push( spawnOne( assert, _.extend( {}, spawnOptions, {
+					name: "Server" + ( serverPaths.length > 1 ? " " + ( ++serverIndex ) : "" ),
+					path: serverPath,
+					onReady: callback
+				} ) ) );
+			}, function() {
+				var clientIndex = 0;
+				async.eachSeries( clientPaths, function startOneChild( item, callback ) {
+					children.push( spawnOne( assert, _.extend( {}, spawnOptions, {
+						name: "Client" +
+							( clientPaths.length > 1 ? " " + ( ++clientIndex ) : "" ),
+					path: item } ) ) );
 
-						setTimeout( callback, 0 );
-					} );
-				}
-			} ) ) );
+					setTimeout( callback, 0 );
+				} );
+			} );
 		} );
 	} );
 }
